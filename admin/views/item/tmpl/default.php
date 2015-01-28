@@ -1067,8 +1067,6 @@ $type_lbl = $this->row->type_id ? JText::_( 'FLEXI_ITEM_TYPE' ) . ' : ' . $this-
 	<?php endif;
 	?>
 	
-	
-	
 	<div class='tabbertab' id='fcform_tabset_<?php echo $tabSetCnt; ?>_tab_<?php echo $tabCnt[$tabSetCnt]++; ?>' >
 		<h3 class="tabberheading"> <?php echo JText::_('FLEXI_TEMPLATE'); ?> </h3>
 		
@@ -1141,17 +1139,12 @@ $type_lbl = $this->row->type_id ? JText::_( 'FLEXI_ITEM_TYPE' ) . ' : ' . $this-
 		</fieldset>
 		
 	</div> <!-- end tab -->
-
-<?php
-// ***************
-// MAIN TABSET END
-// ***************
-?>
-</div> <!-- end of tab set -->
-				
-				
-			</td>
-			<td valign="top" width="380px" style="padding: 7px 0 0 5px">
+	
+	<!-- Versionning tab -->
+		<div class='tabbertab' id='fcform_tabset_<?php echo $tabSetCnt; ?>_tab_<?php echo $tabCnt[$tabSetCnt]++; ?>' >
+		<h3 class="tabberheading">  <?php echo JText::_('FLEXI_VERSIONS'); ?> </h3>
+		
+		<div class="fc-board-set-inner">
 
 		<?php
 		// used to hide "Reset Hits" when hits = 0
@@ -1168,12 +1161,17 @@ $type_lbl = $this->row->type_id ? JText::_( 'FLEXI_ITEM_TYPE' ) . ' : ' . $this-
 		}
 
 		?>
-		<table width="100%" style="border: 1px dashed silver; padding: 5px; margin-bottom: 10px;">
+		<table class="fc-table-list fc-tbl-short" style="margin:10px;">
+		<tr>
+			<th colspan="2">
+				<?php echo JText::_( 'FLEXI_VERSION_INFO' ); ?>
+			</th>
+		</tr>
 		<?php
 		if ( $this->row->id ) {
 		?>
 		<tr>
-			<td>
+			<td width="150" align="right">
 				<span class="label"><?php echo JText::_( 'FLEXI_ITEM_ID' ); ?></span>
 			</td>
 			<td>
@@ -1184,7 +1182,7 @@ $type_lbl = $this->row->type_id ? JText::_( 'FLEXI_ITEM_TYPE' ) . ' : ' . $this-
 		}
 		?>
 		<tr>
-			<td>
+			<td align="right">
 				<?php
 					$field = isset($this->fields['state']) ? $this->fields['state'] : false;
 					if ($field) {
@@ -1200,7 +1198,7 @@ $type_lbl = $this->row->type_id ? JText::_( 'FLEXI_ITEM_TYPE' ) . ' : ' . $this-
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td align="right">
 				<?php
 					$field = isset($this->fields['hits']) ? $this->fields['hits'] : false;
 					if ($field) {
@@ -1214,12 +1212,12 @@ $type_lbl = $this->row->type_id ? JText::_( 'FLEXI_ITEM_TYPE' ) . ' : ' . $this-
 			<td>
 				<div id="hits" style="float:left;"></div> &nbsp;
 				<span <?php echo $visibility; ?>>
-					<input name="reset_hits" type="button" class="button" value="<?php echo JText::_( 'FLEXI_RESET' ); ?>" onclick="reseter('<?php echo $ctrl_items; ?>resethits', '<?php echo $this->row->id; ?>', 'hits')" />
+					<input name="reset_hits" type="button" class="button btn-small btn-warning" value="<?php echo JText::_( 'FLEXI_RESET' ); ?>" onclick="reseter('<?php echo $ctrl_items; ?>resethits', '<?php echo $this->row->id; ?>', 'hits')" />
 				</span>
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td align="right">
 				<?php
 					$field = isset($this->fields['voting']) ? $this->fields['voting'] : false;
 					if ($field) {
@@ -1233,28 +1231,23 @@ $type_lbl = $this->row->type_id ? JText::_( 'FLEXI_ITEM_TYPE' ) . ' : ' . $this-
 			<td>
 				<div id="votes" style="float:left;"></div> &nbsp;
 				<span <?php echo $visibility2; ?>>
-					<input name="reset_votes" type="button" class="button" value="<?php echo JText::_( 'FLEXI_RESET' ); ?>" onclick="reseter('<?php echo $ctrl_items; ?>resetvotes', '<?php echo $this->row->id; ?>', 'votes')" />
+					<input name="reset_votes" type="button" class="button btn-small btn-warning" value="<?php echo JText::_( 'FLEXI_RESET' ); ?>" onclick="reseter('<?php echo $ctrl_items; ?>resetvotes', '<?php echo $this->row->id; ?>', 'votes')" />
 				</span>
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td align="right">
 				<?php
-					$field = isset($this->fields['modified']) ? $this->fields['modified'] : false;
-					if ($field) {
-						$label_tooltip = 'class="'.$tip_class.' label" title="'.flexicontent_html::getToolTip(null, $field->description, 0, 1).'"';
-					} else {
-						$label_tooltip = 'class="label"';
-					}
+					$label_tooltip = 'class="label"';
 				?>
-				<span <?php echo $label_tooltip; ?>><?php echo $field ? $field->label : JText::_( 'FLEXI_REVISED' ); ?></span>
+				<span <?php echo $label_tooltip; ?>><?php echo JText::_( 'FLEXI_REVISED' ); ?></span>
 			</td>
 			<td>
 				<?php echo $this->row->last_version;?> <?php echo JText::_( 'FLEXI_TIMES' ); ?>
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td align="right">
 				<strong class="label"><?php echo JText::_( 'FLEXI_FRONTEND_ACTIVE_VERSION' ); ?></strong>
 			</td>
 			<td>
@@ -1262,7 +1255,7 @@ $type_lbl = $this->row->type_id ? JText::_( 'FLEXI_ITEM_TYPE' ) . ' : ' . $this-
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td align="right">
 				<strong class="label"><?php echo JText::_( 'FLEXI_FORM_LOADED_VERSION' ); ?></strong>
 			</td>
 			<td>
@@ -1270,7 +1263,7 @@ $type_lbl = $this->row->type_id ? JText::_( 'FLEXI_ITEM_TYPE' ) . ' : ' . $this-
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td align="right">
 				<?php
 					$field = isset($this->fields['created']) ? $this->fields['created'] : false;
 					if ($field) {
@@ -1292,7 +1285,7 @@ $type_lbl = $this->row->type_id ? JText::_( 'FLEXI_ITEM_TYPE' ) . ' : ' . $this-
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td align="right">
 				<?php
 					$field = isset($this->fields['modified']) ? $this->fields['modified'] : false;
 					if ($field) {
@@ -1316,23 +1309,23 @@ $type_lbl = $this->row->type_id ? JText::_( 'FLEXI_ITEM_TYPE' ) . ' : ' . $this-
 		</table>
 
 	<?php if ($this->params->get('use_versioning', 1)) : ?>
-		<table width="100%" style="border: 1px dashed silver; padding: 5px; margin-bottom: 10px;">
+		<table class="fc-table-list fc-tbl-short" style="margin:10px;">
 			<tr>
-				<th style="border-bottom: 1px dotted silver; padding-bottom: 3px;" colspan="4">
-					<span class="badge"><?php echo JText::_( 'FLEXI_VERSION_COMMENT' ); ?></span>
+				<th>
+					<?php echo JText::_( 'FLEXI_VERSION_COMMENT' ); ?>
 				</th>
 			</tr>
 			<tr>
-				<td><textarea name="jform[versioncomment]" id="versioncomment" style="width: 300px; height: 30px; line-height:100%" rows="5" cols="32"></textarea></td>
+				<td style="padding-top:4px; padding-bottom:4px;"><textarea name="jform[versioncomment]" id="versioncomment" style="width: 96%; padding: 6px 2%; line-height:120%" rows="4"></textarea></td>
 			</tr>
 		</table>
 		
 		<?php if ( $this->perms['canversion'] ) : ?>
 		<div id="result" >
-		<table width="100%" style="border: 1px dashed silver; padding: 5px; margin-bottom: 5px;" cellpadding="0" cellspacing="0">
+		<table class="fc-table-list fc-tbl-short" style="margin:10px;">
 			<tr>
-				<th style="border-bottom: 1px dotted silver; padding: 2px 0 6px 0;" colspan="4">
-					<span class="badge"><?php echo JText::_( 'FLEXI_VERSIONS_HISTORY' ); ?></span>
+				<th colspan="4">
+					<?php echo JText::_( 'FLEXI_VERSIONS_HISTORY' ); ?>
 				</th>
 			</tr>
 			<?php if ($this->row->id == 0) : ?>
@@ -1343,14 +1336,14 @@ $type_lbl = $this->row->type_id ? JText::_( 'FLEXI_ITEM_TYPE' ) . ' : ' . $this-
 			else :
 			$date_format = (($date_format = JText::_( 'FLEXI_DATE_FORMAT_FLEXI_VERSIONS_J16GE' )) == 'FLEXI_DATE_FORMAT_FLEXI_VERSIONS_J16GE') ? "d/M H:i" : $date_format;
 			foreach ($this->versions as $version) :
-				$class = ($version->nr == $this->row->version) ? ' class="active-version"' : '';
+				$class = ($version->nr == $this->row->version) ? ' class="active-version success"' : '';
 				if ((int)$version->nr > 0) :
 			?>
 			<tr<?php echo $class; ?>>
 				<td class="versions"><span style="padding: 0 5px 0 0;"><?php echo '#' . $version->nr; ?></span></td>
 				<td class="versions"><span style="padding: 0 5px 0 0;"><?php echo JHTML::_('date', (($version->nr == 1) ? $this->row->created : $version->date), $date_format ); ?></span></td>
 				<td class="versions"><span style="padding: 0 5px 0 0;"><?php echo ($version->nr == 1) ? flexicontent_html::striptagsandcut($this->row->creator, 25) : flexicontent_html::striptagsandcut($version->modifier, 25); ?></span></td>
-				<td class="versions" align="center"><a href="javascript:;" class="hasTip" title="Comment::<?php echo htmlspecialchars($version->comment, ENT_COMPAT, 'UTF-8');?>"><?php echo $commentimage;?></a><?php
+				<td class="versions"><a href="javascript:;" class="hasTip" title="Comment::<?php echo htmlspecialchars($version->comment, ENT_COMPAT, 'UTF-8');?>"><?php echo $commentimage;?></a><?php
 				if((int)$version->nr==(int)$this->row->current_version) { ?>
 					<a onclick="javascript:return clickRestore('index.php?option=com_flexicontent&view=item&<?php echo $task_items;?>edit&cid=<?php echo $this->row->id;?>&version=<?php echo $version->nr; ?>');" href="#"><?php echo JText::_( 'FLEXI_CURRENT' ); ?></a>
 				<?php }else{
@@ -1380,9 +1373,17 @@ $type_lbl = $this->row->type_id ? JText::_( 'FLEXI_ITEM_TYPE' ) . ' : ' . $this-
 		<?php endif; ?>
 	<?php endif; ?>
 	
-		</td>
-	</tr>
-</table>
+	</div>
+	</div>
+
+<?php
+// ***************
+// MAIN TABSET END
+// ***************
+?>
+</div> <!-- end of tab set -->
+				
+
 <?php echo JHTML::_( 'form.token' ); ?>
 <input type="hidden" name="option" value="com_flexicontent" />
 <input type="hidden" name="jform[id]" value="<?php echo $this->row->id; ?>" />
